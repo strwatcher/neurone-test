@@ -15,7 +15,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-redux/recommended',
-    '@feature-sliced',
     'prettier',
   ],
 
