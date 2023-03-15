@@ -1,0 +1,12 @@
+.button {
+  background-color: white;
+  border: solid 2px lightgray;
+  color: gray;
+  border-radius: 6px;
+  padding: 10px 20px;
+  width: clamp(100px, 40vw, 400px);
+
+  &:hover {
+    border: solid 2px #888888
+  }
+}

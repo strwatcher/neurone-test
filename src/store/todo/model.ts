@@ -1,12 +1,11 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Todo } from '@/shared'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { API } from '@/shared/api'
 import { TodoState } from './types'
 
 export const fetchTodoById = createAsyncThunk(
   'todo/fetchTodoById',
-  async (todoId: number) => {
-    todoWillFetch()
+  async (todoId: number, thunkApi) => {
+    thunkApi.dispatch(todoWillFetch())
     const todo = await API.todo.byId(todoId)
     return todo
   }
@@ -19,33 +18,26 @@ const todoSlice = createSlice({
     status: 'idle',
     error: '',
   } as TodoState,
+
   reducers: {
-    todoReceived: (state, action: PayloadAction<Todo>) => {
-      state.todo = action.payload
-      state.status = 'success'
-    },
-
-    todoFailed: (state, action: PayloadAction<string>) => {
-      state.todo = null
-      state.status = 'error'
-      state.error = action.payload
-    },
-
     todoWillFetch: (state) => {
       state.status = 'loading'
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchTodoById.fulfilled, (_, action) => {
+    builder.addCase(fetchTodoById.fulfilled, (state, action) => {
       if ('error' in action.payload) {
-        todoFailed(action.payload.error)
+        state.todo = null
+        state.status = 'error'
+        state.error = action.payload.error
       } else {
-        todoReceived(action.payload)
+        state.todo = action.payload
+        state.status = 'success'
       }
     })
   },
 })
 
-export const { todoWillFetch, todoReceived, todoFailed } = todoSlice.actions
+export const { todoWillFetch } = todoSlice.actions
 
 export const todoReducer = todoSlice.reducer
