@@ -8,7 +8,7 @@ export const Input = (props: InputProps) => {
     <input
       className={joinClasses(
         s.input,
-        resp.responslableWidth,
+        resp.responsableWidth,
         props.disabled && s.disabled
       )}
       type="text"

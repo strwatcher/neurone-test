@@ -1,11 +1,18 @@
 .button {
   background-color: white;
   border: solid 2px lightgray;
-  color: gray;
   border-radius: 6px;
   padding: 10px 20px;
 
   &:hover {
-    border: solid 2px #888888
+    border: solid 2px black
+  }
+}
+
+.disabled {
+  opacity: 0.4;
+
+  &:hover {
+    border: solid 2px lightgray
   }
 }
