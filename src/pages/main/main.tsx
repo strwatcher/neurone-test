@@ -1,10 +1,10 @@
 import { Error } from '@/entities/error'
 import { Todo } from '@/entities/todo'
 import { Button } from '@/shared/ui'
-import { Input } from '@/shared/ui/input'
+import { Input } from '@/shared/ui'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { setValue } from '@/store/form/model'
-import { fetchTodoById, toggleChecked } from '@/store/todo/model'
+import { setValue } from '@/store'
+import { fetchTodoById, toggleChecked } from '@/store'
 import s from './s.module.scss'
 
 export const Main = () => {
@@ -19,6 +19,8 @@ export const Main = () => {
   return (
     <section className={s.pageWrapper}>
       <Input
+        id={'todoIdInput'}
+        title={'Поиск todo по id'}
         value={value.toString()}
         onChange={(e) => dispatch(setValue(e.target.value))}
         disabled={status === 'loading'}

@@ -1,6 +1,6 @@
 import s from './s.module.scss'
-import { respClasses } from '@/shared/ui'
 import { TodoProps } from './types'
+import { respClasses } from '@/shared/ui'
 import { joinClasses } from '@/shared/lib'
 
 export const Todo = (props: TodoProps) => {
