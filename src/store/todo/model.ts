@@ -23,6 +23,11 @@ const todoSlice = createSlice({
     todoWillFetch: (state) => {
       state.status = 'loading'
     },
+    toggleChecked: (state) => {
+      if (state.todo) {
+        state.todo.completed = !state.todo.completed
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTodoById.fulfilled, (state, action) => {
@@ -38,6 +43,6 @@ const todoSlice = createSlice({
   },
 })
 
-export const { todoWillFetch } = todoSlice.actions
+export const { todoWillFetch, toggleChecked } = todoSlice.actions
 
 export const todoReducer = todoSlice.reducer

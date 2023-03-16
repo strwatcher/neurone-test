@@ -1,8 +1,10 @@
+import { Error } from '@/entities/error'
+import { Todo } from '@/entities/todo'
 import { Button } from '@/shared/ui'
 import { Input } from '@/shared/ui/input'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { setValue } from '@/store/form/model'
-import { fetchTodoById } from '@/store/todo/model'
+import { fetchTodoById, toggleChecked } from '@/store/todo/model'
 import s from './s.module.scss'
 
 export const Main = () => {
@@ -26,8 +28,13 @@ export const Main = () => {
         onClick={() => {
           dispatch(fetchTodoById(value))
         }}
+        disabled={status === 'loading'}
       />
-      {status === 'loading' && 'Загрузка'}
+      {status === 'success' && todo && (
+        <Todo data={todo} onToggle={() => dispatch(toggleChecked())} />
+      )}
+      {status === 'error' && <Error text={error} />}
+      {status === 'loading' && 'Загрузка...'}
     </section>
   )
 }

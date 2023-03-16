@@ -9,7 +9,7 @@ export const fetchTodoById = async (id: number) => {
     return data as Todo
   } else {
     return {
-      error: 'something went wrong',
+      error: await response.text(),
     }
   }
 }
